@@ -1,13 +1,15 @@
-# app/__init__.py
-
 from flask import Flask
 from flasgger import Swagger
+from dotenv import load_dotenv
 from .config import Config
 from .utils import call_service_with_retries, token_required
 from .auth.routes import auth_bp
 from .students.routes import students_bp
 from .grades.routes import grades_bp
+from .restrictions.routes import restrictions_bp
+from .misc.routes import misc_bp
 
+load_dotenv()
 
 def create_app():
     app = Flask(__name__)
@@ -56,5 +58,9 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(students_bp)
     app.register_blueprint(grades_bp)
+    app.register_blueprint(restrictions_bp)
+    app.register_blueprint(misc_bp)
 
     return app
+
+app = create_app()

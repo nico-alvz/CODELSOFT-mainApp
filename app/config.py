@@ -6,7 +6,7 @@ class Config:
         config = json.load(config_file)
     
     MAX_RETRIES = config.get("MAX_RETRIES", 3)
-    BASE_DELAY = config.get("BASE_DELAY", 1000) / 1000
+    BASE_DELAY = config.get("BASE_DELAY", 1000) / 1000 
     EXTERNAL_SERVICES = {
         "auth": os.getenv("AUTH_SERVICE_URL", config["external_services"]["auth"]),
         "search": os.getenv("SEARCH_SERVICE_URL", config["external_services"]["search"]),
