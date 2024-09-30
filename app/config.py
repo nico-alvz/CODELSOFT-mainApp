@@ -1,18 +1,14 @@
 import os
-import json
 
 class Config:
-    with open('config.json') as config_file:
-        config = json.load(config_file)
-    
-    MAX_RETRIES = config.get("MAX_RETRIES", 3)
-    BASE_DELAY = config.get("BASE_DELAY", 1000) / 1000 
+    MAX_RETRIES = int(os.getenv("MAX_RETRIES", 3))
+    BASE_DELAY = int(os.getenv("BASE_DELAY", 1000)) / 1000
     EXTERNAL_SERVICES = {
-        "auth": os.getenv("AUTH_SERVICE_URL", config["external_services"]["auth"]),
-        "search": os.getenv("SEARCH_SERVICE_URL", config["external_services"]["search"]),
-        "grades": os.getenv("GRADES_SERVICE_URL", config["external_services"]["grades"]),
-        "restrictions": os.getenv("RESTRICTIONS_SERVICE_URL", config["external_services"]["restrictions"])
+        "auth": os.getenv("AUTH_SERVICE_URL"),
+        "search": os.getenv("SEARCH_SERVICE_URL"),
+        "grades": os.getenv("GRADES_SERVICE_URL"),
+        "restrictions": os.getenv("RESTRICTIONS_SERVICE_URL")
     }
-    
+
     JWT_SECRET = os.getenv("JWT_SECRET", "default_secret")
     JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
